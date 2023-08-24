@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+:root {
+    --primary-color: #f6f7fb;
+    --white-color: #fff;
+    --black-color: #18191a;
+    --red-color: #e74c3c;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px; /* Adjust the gap between clock and other elements */
+}
+
+.container .clock {
+    display: flex;
+    height: 200px; /* Adjust the height */
+    width: 200px; /* Adjust the width */
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    background: var(--white-color);
+    box-shadow: 0 0 1px rgba(0, 0, 2px, 0.5);
+    position: relative;
+}
+
+.container .clock label {
+    position: absolute;
+    inset: 20px;
+    text-align: center;
+    transform: rotate(calc(var(--i) * (360deg / 12)));
+}
+
+.container .clock label span {
+    display: inline-block;
+    font-size: 20px; /* Adjust the font size */
+    font-weight: 600;
+    color: var(--black-color);
+    transform: rotate(calc(var(--i) * (-360deg / 12)));
+}
+
+.container .indicator {
+    position: absolute;
+    height: 5px; /* Adjust the height */
+    width: 5px; /* Adjust the width */
+    display: flex;
+    justify-content: center;
+}
+
+.container .indicator::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    z-index: 100;
+    background: var(--black-color);
+    border: 2px solid var(--red-color); /* Adjust the border size and color */
+}
+
+.container .indicator .hand {
+    position: absolute;
+    height: 65px; /* Adjust the height */
+    width: 2px; /* Adjust the width */
+    bottom: 0;
+    border-radius: 25px;
+    transform-origin: bottom;
+    background: var(--red-color);
+}
+
+.container .indicator .hand.minute {
+    height: 60px; /* Adjust the height */
+    width: 3px; /* Adjust the width */
+    background: var(--black-color);
+}
+
+.container .indicator .hand.hour {
+    height: 50px; /* Adjust the height */
+    width: 6px; /* Adjust the width */
+    background: var(--black-color);
+}
+
+/* Add any additional styling or adjustments here */

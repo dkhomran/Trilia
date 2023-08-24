@@ -1,0 +1,706 @@
+/*----------------------------------------
+---  Global Style File : Dekhil Omran  ---
+------------- 2023 - 2024 ----------------
+------------------------------------------ */
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=League+Spartan:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* styles.css or inline styles in The Blade template */
+.priority-label {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    display: flex;
+    width: max-content;
+}
+
+.low-priority {
+    background-color: green;
+    color: white;
+}
+
+.medium-priority {
+    background-color: orange;
+    color: white;
+}
+
+.high-priority {
+    background-color: red;
+    color: white;
+}
+
+.croppie-container {
+    width: 100%;
+    height: 100%;
+}
+
+.croppie-container .cr-image {
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: 0 0;
+    max-height: none;
+    max-width: none;
+}
+
+.croppie-container .cr-boundary {
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.croppie-container .cr-viewport,
+.croppie-container .cr-resizer {
+    position: absolute;
+    border: 2px solid #fff;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    box-shadow: 0 0 2000px 2000px rgba(0, 0, 0, 0.5);
+    z-index: 0;
+}
+
+.croppie-container .cr-resizer {
+    z-index: 2;
+    box-shadow: none;
+    pointer-events: none;
+}
+
+.croppie-container .cr-resizer-vertical,
+.croppie-container .cr-resizer-horisontal {
+    position: absolute;
+    pointer-events: all;
+}
+
+.croppie-container .cr-resizer-vertical::after,
+.croppie-container .cr-resizer-horisontal::after {
+    display: block;
+    position: absolute;
+    box-sizing: border-box;
+    border: 1px solid black;
+    background: #fff;
+    width: 10px;
+    height: 10px;
+    content: "";
+}
+
+.croppie-container .cr-resizer-vertical {
+    bottom: -5px;
+    cursor: row-resize;
+    width: 100%;
+    height: 10px;
+}
+
+.croppie-container .cr-resizer-vertical::after {
+    left: 50%;
+    margin-left: -5px;
+}
+
+.croppie-container .cr-resizer-horisontal {
+    right: -5px;
+    cursor: col-resize;
+    width: 10px;
+    height: 100%;
+}
+
+.croppie-container .cr-resizer-horisontal::after {
+    top: 50%;
+    margin-top: -5px;
+}
+
+.croppie-container .cr-original-image {
+    display: none;
+}
+
+.croppie-container .cr-vp-circle {
+    border-radius: 50%;
+}
+
+.croppie-container .cr-overlay {
+    z-index: 1;
+    position: absolute;
+    cursor: move;
+    touch-action: none;
+}
+
+.croppie-container .cr-slider-wrap {
+    width: 75%;
+    margin: 15px auto;
+    text-align: center;
+}
+
+.croppie-result {
+    position: relative;
+    overflow: hidden;
+}
+
+.croppie-result img {
+    position: absolute;
+}
+
+.croppie-container .cr-image,
+.croppie-container .cr-overlay,
+.croppie-container .cr-viewport {
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+/*************************************/
+/***** STYLING RANGE INPUT ***********/
+/*************************************/
+
+.cr-slider {
+    -webkit-appearance: none;
+    /*removes default webkit styles*/
+    /*border: 1px solid white; */ /*fix for FF unable to apply focus style bug */
+    width: 300px;
+    /*required for proper track sizing in FF*/
+    max-width: 100%;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background-color: transparent;
+}
+
+.cr-slider::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 3px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 0;
+    border-radius: 3px;
+}
+
+.cr-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #ddd;
+    margin-top: -6px;
+}
+
+.cr-slider:focus {
+    outline: none;
+}
+/*
+.cr-slider:focus::-webkit-slider-runnable-track {
+background: #ccc;
+}
+*/
+
+.cr-slider::-moz-range-track {
+    width: 100%;
+    height: 3px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 0;
+    border-radius: 3px;
+}
+
+.cr-slider::-moz-range-thumb {
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #ddd;
+    margin-top: -6px;
+}
+
+/*hide the outline behind the border*/
+.cr-slider:-moz-focusring {
+    outline: 1px solid white;
+    outline-offset: -1px;
+}
+
+.cr-slider::-ms-track {
+    width: 100%;
+    height: 5px;
+    background: transparent;
+    /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+    border-color: transparent; /*leave room for the larger thumb to overflow with a transparent border */
+    border-width: 6px 0;
+    color: transparent; /*remove default tick marks*/
+}
+.cr-slider::-ms-fill-lower {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+.cr-slider::-ms-fill-upper {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+.cr-slider::-ms-thumb {
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #ddd;
+    margin-top: 1px;
+}
+.cr-slider:focus::-ms-fill-lower {
+    background: rgba(0, 0, 0, 0.5);
+}
+.cr-slider:focus::-ms-fill-upper {
+    background: rgba(0, 0, 0, 0.5);
+}
+/*******************************************/
+
+/***********************************/
+/* Rotation Tools */
+/***********************************/
+.cr-rotate-controls {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    z-index: 1;
+}
+.cr-rotate-controls button {
+    border: 0;
+    background: none;
+}
+.cr-rotate-controls i:before {
+    display: inline-block;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 22px;
+}
+.cr-rotate-l i:before {
+    content: "↺";
+}
+.cr-rotate-r i:before {
+    content: "↻";
+}
+
+.bg-pattern-zig-zag {
+    background-image: url('../../public/image/login/bg.jpg') ;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.bg-pattern-isometric {
+    background-color: #ffffff;
+    opacity: 1;
+    background-image: linear-gradient(
+            30deg,
+            #797979 12%,
+            transparent 12.5%,
+            transparent 87%,
+            #797979 87.5%,
+            #797979
+        ),
+        linear-gradient(
+            150deg,
+            #797979 12%,
+            transparent 12.5%,
+            transparent 87%,
+            #797979 87.5%,
+            #797979
+        ),
+        linear-gradient(
+            30deg,
+            #797979 12%,
+            transparent 12.5%,
+            transparent 87%,
+            #797979 87.5%,
+            #797979
+        ),
+        linear-gradient(
+            150deg,
+            #797979 12%,
+            transparent 12.5%,
+            transparent 87%,
+            #797979 87.5%,
+            #797979
+        ),
+        linear-gradient(
+            60deg,
+            #79797977 25%,
+            transparent 25.5%,
+            transparent 75%,
+            #79797977 75%,
+            #79797977
+        ),
+        linear-gradient(
+            60deg,
+            #79797977 25%,
+            transparent 25.5%,
+            transparent 75%,
+            #79797977 75%,
+            #79797977
+        );
+    background-size: 42px 74px;
+    background-position: 0 0, 0 0, 21px 37px, 21px 37px, 0 0, 21px 37px;
+}
+
+.bg-pattern-wavy {
+    background-color: #ffffff;
+    opacity: 1;
+    background-image: repeating-radial-gradient(
+            circle at 0 0,
+            transparent 0,
+            #ffffff 21px
+        ),
+        repeating-linear-gradient(#79797955, #797979);
+}
+
+.bg-pattern-triangle {
+    background-color: #ffffff;
+    opacity: 1;
+    background-image: linear-gradient(45deg, #797979 50%, #ffffff 50%);
+    background-size: 21px 21px;
+}
+
+.bg-pattern-paper {
+    background-color: #ffffff;
+    opacity: 1;
+    background-image: linear-gradient(#797979 4.2px, transparent 4.2px),
+        linear-gradient(90deg, #797979 4.2px, transparent 4.2px),
+        linear-gradient(#797979 2.1px, transparent 2.1px),
+        linear-gradient(90deg, #797979 2.1px, #ffffff 2.1px);
+    background-size: 105px 105px, 105px 105px, 21px 21px, 21px 21px;
+    background-position: -4.2px -4.2px, -4.2px -4.2px, -2.1px -2.1px,
+        -2.1px -2.1px;
+}
+.bg-pattern-moon {
+    background-color: #ffffff;
+    opacity: 1;
+    background-image: radial-gradient(
+        ellipse farthest-corner at 21px 21px,
+        #797979,
+        #797979 50%,
+        #ffffff 50%
+    );
+    background-size: 21px 21px;
+}
+.bg-pattern-rect {
+    background-color: #ffffff;
+    opacity: 1;
+    background-image: repeating-linear-gradient(
+            45deg,
+            #797979 25%,
+            transparent 25%,
+            transparent 75%,
+            #797979 75%,
+            #797979
+        ),
+        repeating-linear-gradient(
+            45deg,
+            #797979 25%,
+            #ffffff 25%,
+            #ffffff 75%,
+            #797979 75%,
+            #797979
+        );
+    background-position: 0 0, 21px 21px;
+    background-size: 42px 42px;
+}
+.bg-pattern-triangle-2 {
+    background-color: #ffffff;
+    opacity: 1;
+    background-image: linear-gradient(
+        -45deg,
+        #ffffff,
+        #ffffff 50%,
+        #797979 50%,
+        #797979
+    );
+    background-size: 21px 21px;
+}
+.bg-pattern-polka {
+    background-color: #ffffff;
+    opacity: 1;
+    background-image: radial-gradient(#797979 3px, #ffffff 3px);
+    background-size: 21px 21px;
+}
+.bg-pattern-polka-2 {
+    background-color: #ffffff;
+    opacity: 1;
+    background-image: radial-gradient(#797979 3px, transparent 3px),
+        radial-gradient(#797979 3px, #ffffff 3px);
+    background-size: 40px 40px;
+    background-position: 0 0, 21px 21px;
+}
+.bg-pattern-line-bold-horizontal {
+    background-color: #ffffff;
+    opacity: 1;
+    background-image: linear-gradient(0deg, #ffffff 50%, #797979 50%);
+    background-size: 21px 21px;
+}
+.bg-pattern-line-bold-vertical {
+    background-color: #ffffff;
+    opacity: 1;
+    background-image: linear-gradient(
+        to right,
+        #797979,
+        #797979 10.5px,
+        #ffffff 10.5px,
+        #ffffff
+    );
+    background-size: 21px 100%;
+}
+.bg-pattern-line-thin-diagonal {
+    background-color: #ffffff;
+    opacity: 1;
+    background-size: 21px 21px;
+    background-image: repeating-linear-gradient(
+        45deg,
+        #797979 0,
+        #797979 2.1px,
+        #ffffff 0,
+        #ffffff 50%
+    );
+}
+.bg-pattern-box {
+    background-color: #ffffff;
+    opacity: 1;
+    background-image: linear-gradient(#797979 2.1px, transparent 2.1px),
+        linear-gradient(to right, #797979 2.1px, #ffffff 2.1px);
+    background-size: 42px 42px;
+}
+.bg-pattern-zig-zag-flat {
+    background-color: #ffffff;
+    opacity: 1;
+    background-image: linear-gradient(135deg, #797979 25%, transparent 25%),
+        linear-gradient(225deg, #797979 25%, transparent 25%),
+        linear-gradient(45deg, #797979 25%, transparent 25%),
+        linear-gradient(315deg, #797979 25%, #ffffff 25%);
+    background-position: 21px 0, 21px 0, 0 0, 0 0;
+    background-size: 42px 42px;
+    background-repeat: repeat;
+}
+.bg-pattern-circle {
+    background-color: #ffffff;
+    opacity: 1;
+    background-image: radial-gradient(circle at center center, #cdcdcd, #ffffff),
+        repeating-radial-gradient(
+            circle at center center,
+            #cdcdcd,
+            #cdcdcd,
+            14px,
+            transparent 28px,
+            transparent 14px
+        );
+    background-blend-mode: multiply;
+}
+
+.bg-grad-sunkist {
+    background: #f2994a; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+        to right,
+        #f2c94c,
+        #f2994a
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to right,
+        #f2c94c,
+        #f2994a
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.bg-grad-mini {
+    background: #30e8bf; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+        to right,
+        #ff8235,
+        #30e8bf
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to right,
+        #ff8235,
+        #30e8bf
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.bg-grad-sha-la-la {
+    background: #d66d75; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+        to right,
+        #e29587,
+        #d66d75
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to right,
+        #e29587,
+        #d66d75
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.bg-grad-celestial {
+    background: #c33764; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+        to right,
+        #1d2671,
+        #c33764
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to right,
+        #1d2671,
+        #c33764
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.bg-grad-dream {
+    background: #34e89e; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+        to right,
+        #0f3443,
+        #34e89e
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to right,
+        #0f3443,
+        #34e89e
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.bg-grad-blue {
+    background: #0575e6; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+        to right,
+        #021b79,
+        #0575e6
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to right,
+        #021b79,
+        #0575e6
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.bg-grad-purple {
+    background: #4568dc; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+        to right,
+        #b06ab3,
+        #4568dc
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to right,
+        #b06ab3,
+        #4568dc
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.bg-grad-ellegant {
+    background: #e8cbc0; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+        to right,
+        #636fa4,
+        #e8cbc0
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to right,
+        #636fa4,
+        #e8cbc0
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.bg-grad-jaipur {
+    background: #dbe6f6; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+        to right,
+        #c5796d,
+        #dbe6f6
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to right,
+        #c5796d,
+        #dbe6f6
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.bg-grad-mild {
+    background: #67b26f; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+        to right,
+        #4ca2cd,
+        #67b26f
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to right,
+        #4ca2cd,
+        #67b26f
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.bg-grad-sunset {
+    background: #ee0979; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+        to right,
+        #ff6a00,
+        #ee0979
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to right,
+        #ff6a00,
+        #ee0979
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.bg-grad-cosmic {
+    background: #ff00cc; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+        to right,
+        #333399,
+        #ff00cc
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to right,
+        #333399,
+        #ff00cc
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.bg-grad-jupiter {
+    background: #ff00cc; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+        to right,
+        #333399,
+        #ff00cc
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to right,
+        #333399,
+        #ff00cc
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.bg-grad-police {
+    background: #2196f3; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+        to right,
+        #f44336,
+        #2196f3
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to right,
+        #f44336,
+        #2196f3
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.bg-grad-morning {
+    background: #ff5f6d; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+        to right,
+        #ffc371,
+        #ff5f6d
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to right,
+        #ffc371,
+        #ff5f6d
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
